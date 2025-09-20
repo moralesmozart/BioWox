@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-white text-gray-900 font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .biowox-gradient {
+    @apply bg-gradient-to-r from-biowox-500 to-biowoxLight-400;
+  }
+  
+  .biowox-gradient-text {
+    @apply bg-gradient-to-r from-biowox-500 to-biowoxLight-400 bg-clip-text text-transparent;
+  }
+  
+  .floating-icon {
+    @apply absolute opacity-60 hover:opacity-100 transition-opacity duration-300;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-biowox-500/20;
+  }
+  
+  .button-primary {
+    @apply bg-gradient-to-r from-biowox-500 to-biowoxLight-400 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-biowox-500/30 focus:outline-none focus:ring-2 focus:ring-biowox-500 focus:ring-offset-2;
+  }
+  
+  .button-secondary {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-white/20 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
