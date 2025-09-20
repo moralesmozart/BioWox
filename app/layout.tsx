@@ -16,9 +16,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://moralesmozart.github.io/BioWox/'),
   title: 'BioWox - Microbiologia Avançada | O futuro da microbiologia já chegou',
-  description: 'Precisão, tecnologia e saúde em cada resultado. Laboratório de microbiologia avançada com automação, precisão e velocidade.',
-  keywords: 'microbiologia, laboratório, análise, automação, precisão, saúde, BioWox',
+  description: '🧬 Laboratório de microbiologia avançada com tecnologia de ponta. Automação, precisão e velocidade em cada análise. O futuro da microbiologia já chegou!',
+  keywords: 'microbiologia, laboratório, análise, automação, precisão, saúde, BioWox, tecnologia, ciência',
   authors: [{ name: 'BioWox' }],
   creator: 'BioWox',
   publisher: 'BioWox',
@@ -36,15 +37,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://biowox.com.br',
+    url: 'https://moralesmozart.github.io/BioWox/',
     title: 'BioWox - Microbiologia Avançada',
-    description: 'O futuro da microbiologia já chegou. Precisão, tecnologia e saúde em cada resultado.',
+    description: '🧬 O futuro da microbiologia já chegou! Laboratório com tecnologia de ponta, automação e precisão em cada resultado.',
     siteName: 'BioWox',
+    images: [
+      {
+        url: '/og-image.svg',
+        width: 1200,
+        height: 630,
+        alt: 'BioWox - Microbiologia Avançada',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'BioWox - Microbiologia Avançada',
-    description: 'O futuro da microbiologia já chegou. Precisão, tecnologia e saúde em cada resultado.',
+    description: '🧬 O futuro da microbiologia já chegou! Tecnologia, automação e precisão em cada análise.',
+    images: ['/og-image.svg'],
   },
 };
 
