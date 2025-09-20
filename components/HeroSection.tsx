@@ -52,18 +52,18 @@ export default function HeroSection({
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8"
           >
-            <div className="flex items-center justify-center gap-6 mb-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-6">
               {/* Logo molecular */}
               <motion.div
                 initial={{ rotate: 0 }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="relative w-20 h-20"
+                className="relative w-16 h-16 sm:w-20 sm:h-20"
               >
                 {/* Círculo principal con gradiente */}
-                <div className="w-20 h-20 bg-gradient-to-b from-biowox-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-b from-biowox-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
                   {/* Diseño molecular interno */}
-                  <svg width="50" height="50" viewBox="0 0 50 50" className="text-white">
+                  <svg width="40" height="40" viewBox="0 0 50 50" className="text-white sm:w-[50px] sm:h-[50px]">
                     {/* Puntos centrales */}
                     <circle cx="25" cy="25" r="2" fill="white" opacity="0.9" />
                     <circle cx="20" cy="20" r="1.5" fill="white" opacity="0.7" />
