@@ -20,7 +20,7 @@ const segurancaFeatures = [
   },
   {
     title: 'Equipe Científica',
-    description: 'Cientistas e técnicos altamente qualificados com especialização em microbiologia clínica e patologia.',
+    description: 'Cientistas e técnicos altamente qualificados com especialização em microbiologia clínica e infectologia.',
     icon: <Users className="w-8 h-8" />,
     certification: 'CRF/CRBM',
   },
