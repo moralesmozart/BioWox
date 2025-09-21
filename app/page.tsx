@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import DiferenciaisSection from '@/components/DiferenciaisSection';
 import ComoFuncionaSection from '@/components/ComoFuncionaSection';
@@ -25,6 +26,9 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen">
+      {/* Header */}
+      <Header />
+      
       {/* Seção Hero */}
       <HeroSection
         title="O futuro da microbiologia já chegou."
