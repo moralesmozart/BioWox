@@ -2,15 +2,13 @@
 
 import { useEffect } from 'react';
 import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import DiferenciaisSection from '@/components/DiferenciaisSection';
-import ComoFuncionaSection from '@/components/ComoFuncionaSection';
-import SegurancaSection from '@/components/SegurancaSection';
-import ContactForm from '@/components/ContactForm';
-import Footer from '@/components/Footer';
-import Section from '@/components/Section';
+import Version1 from '@/components/versions/Version1';
+import Version2 from '@/components/versions/Version2';
+import { useVersion } from '@/lib/version-context';
 
 export default function HomePage() {
+  const { currentVersion } = useVersion();
+
   useEffect(() => {
     // Configurações de segurança e performance
     const handleScroll = () => {
@@ -24,39 +22,23 @@ export default function HomePage() {
     };
   }, []);
 
+  const renderVersion = () => {
+    switch (currentVersion) {
+      case 'v2':
+        return <Version2 />;
+      case 'v1':
+      default:
+        return <Version1 />;
+    }
+  };
+
   return (
     <main className="min-h-screen">
       {/* Header */}
       <Header />
       
-      {/* Seção Hero */}
-      <HeroSection
-        title="O futuro da microbiologia já chegou."
-        subtitle="Precisão, tecnologia e saúde em cada resultado."
-        ctaText="Quero saber mais"
-      />
-
-      {/* Seção Diferenciais */}
-      <DiferenciaisSection />
-
-      {/* Seção Como Funciona */}
-      <ComoFuncionaSection />
-
-      {/* Seção Segurança */}
-      <SegurancaSection />
-
-      {/* Seção de Contato */}
-      <Section
-        id="contato"
-        title="Entre em Contato"
-        subtitle="Estamos prontos para atender suas necessidades em microbiologia"
-        background="gray"
-      >
-        <ContactForm />
-      </Section>
-
-      {/* Footer */}
-      <Footer />
+      {/* Version-specific content */}
+      {renderVersion()}
     </main>
   );
 }
