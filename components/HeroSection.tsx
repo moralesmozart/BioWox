@@ -9,6 +9,7 @@ interface HeroSectionProps {
   title: string;
   subtitle: string;
   ctaText: string;
+  description?: string;
   className?: string;
 }
 
@@ -16,6 +17,7 @@ export default function HeroSection({
   title, 
   subtitle, 
   ctaText, 
+  description,
   className 
 }: HeroSectionProps) {
   const handleCTAClick = () => {
@@ -139,6 +141,18 @@ export default function HeroSection({
           >
             {subtitle}
           </motion.p>
+          
+          {/* Descrição adicional (opcional) */}
+          {description && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-base sm:text-lg text-white/80 max-w-4xl mx-auto leading-relaxed mt-4"
+            >
+              {description}
+            </motion.p>
+          )}
           
           {/* Botão de ação */}
           <motion.div

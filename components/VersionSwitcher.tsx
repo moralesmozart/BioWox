@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Code, Sparkles } from 'lucide-react';
+import { ChevronDown, Code, Sparkles, Building2 } from 'lucide-react';
 import { useVersion } from '@/lib/version-context';
 
 export default function VersionSwitcher() {
@@ -27,6 +27,15 @@ export default function VersionSwitcher() {
       color: 'text-purple-600',
       bgColor: 'bg-purple-50',
       borderColor: 'border-purple-200',
+    },
+    {
+      id: 'v3' as const,
+      name: 'Version 3',
+      description: 'Occupational health focus',
+      icon: Building2,
+      color: 'text-emerald-600',
+      bgColor: 'bg-emerald-50',
+      borderColor: 'border-emerald-200',
     },
   ];
 

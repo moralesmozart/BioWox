@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Version = 'v1' | 'v2';
+type Version = 'v1' | 'v2' | 'v3';
 
 interface VersionContextType {
   currentVersion: Version;
@@ -17,7 +17,7 @@ export function VersionProvider({ children }: { children: React.ReactNode }) {
   // Load version from localStorage on mount
   useEffect(() => {
     const savedVersion = localStorage.getItem('biowox-version') as Version;
-    if (savedVersion && (savedVersion === 'v1' || savedVersion === 'v2')) {
+    if (savedVersion && (savedVersion === 'v1' || savedVersion === 'v2' || savedVersion === 'v3')) {
       setCurrentVersion(savedVersion);
     }
   }, []);
