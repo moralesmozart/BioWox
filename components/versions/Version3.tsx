@@ -17,7 +17,7 @@ export default function Version3() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Seção Hero - Version 3 with occupational health focus */}
+      {/* Seção Hero - Version 3 with occupational health focus - Logo subtitle updated */}
       <div className="relative">
         <HeroSection
           title="Laboratório Médico"
