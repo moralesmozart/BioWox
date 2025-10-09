@@ -10,6 +10,7 @@ interface HeroSectionProps {
   subtitle: string;
   ctaText: string;
   description?: string;
+  logoSubtitle?: string;
   className?: string;
 }
 
@@ -18,6 +19,7 @@ export default function HeroSection({
   subtitle, 
   ctaText, 
   description,
+  logoSubtitle,
   className 
 }: HeroSectionProps) {
   const handleCTAClick = () => {
@@ -116,7 +118,7 @@ export default function HeroSection({
                   Bio<span className="biowox-gradient-text">Wox</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-white/90 font-medium">
-                  MICROBIOLOGIA AVANÇADA
+                  {logoSubtitle || "MICROBIOLOGIA AVANÇADA"}
                 </p>
               </div>
             </div>
