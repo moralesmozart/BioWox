@@ -20,10 +20,9 @@ export default function Version3() {
       {/* Seção Hero - Version 3 with occupational health focus - Logo subtitle updated */}
       <div className="relative">
         <HeroSection
-          title="Laboratório Médico"
-          subtitle="Especialista em exames laboratoriais voltado para área de saúde ocupacional."
-          description="Com foco em empresas dos setores de alimentos, suplementos e manipulação."
-          logoSubtitle="Laboratório Médico"
+          title="Especialista em exames laboratoriais voltado para área de saúde ocupacional."
+          subtitle="Com foco em empresas dos setores de alimentos, suplementos e manipulação."
+          logoSubtitle="Laboratório Médico" 
           ctaText="Saiba mais"
         />
         {/* Version 3 Badge */}
