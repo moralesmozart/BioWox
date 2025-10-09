@@ -5,8 +5,9 @@ import HeroSection from '@/components/HeroSection';
 import DiferenciaisSectionV3 from './DiferenciaisSectionV3';
 import ParaQuemSection from './ParaQuemSection';
 import CompromissoSection from './CompromissoSection';
-import ContactFormV2 from './ContactFormV2';
-import Footer from '@/components/Footer';
+import ContactFormV3 from './ContactFormV3';
+import FooterV3 from './FooterV3';
+import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
 import Section from '@/components/Section';
 
 export default function Version3() {
@@ -76,7 +77,7 @@ export default function Version3() {
           background="gray"
         >
           <div className="relative">
-            <ContactFormV2 />
+            <ContactFormV3 />
             {/* Version 3 enhancement indicator */}
             <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full animate-pulse"></div>
           </div>
@@ -84,7 +85,10 @@ export default function Version3() {
       </motion.div>
 
       {/* Footer */}
-      <Footer />
+      <FooterV3 />
+      
+      {/* Floating WhatsApp Button */}
+      <WhatsAppFloatingButton />
     </motion.div>
   );
 }
