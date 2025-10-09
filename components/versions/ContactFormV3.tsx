@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin, Search, FileText } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin, Search, FileText, MessageCircle } from 'lucide-react';
 import { contactFormSchema, sanitizeInput } from '@/lib/security';
 import { formatPhoneNumber } from '@/lib/utils';
 import type { ContactFormData } from '@/types';
@@ -152,7 +152,7 @@ export default function ContactFormV3({ className }: ContactFormV3Props) {
                     type="tel"
                     id="phone"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors"
-                    placeholder="(48) 99999-9999"
+                    placeholder="(48) 9 9692-7323"
                     value={phoneValue ? formatPhoneNumber(phoneValue) : ''}
                   />
                   {errors.phone && (
@@ -176,23 +176,35 @@ export default function ContactFormV3({ className }: ContactFormV3Props) {
                   )}
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-biowox-500 hover:bg-biowox-600 disabled:bg-gray-400 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>Enviando...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      <span>Enviar Mensagem</span>
-                    </>
-                  )}
-                </button>
+                <div className="space-y-3">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-biowox-500 hover:bg-biowox-600 disabled:bg-gray-400 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Enviando...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        <span>Enviar Mensagem</span>
+                      </>
+                    )}
+                  </button>
+                  
+                  {/* WhatsApp CTA Button */}
+                  <button
+                    type="button"
+                    onClick={() => window.open('http://wa.me/+5548996927323', '_blank')}
+                    className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Fale conosco no WhatsApp</span>
+                  </button>
+                </div>
 
                 {/* Status Messages */}
                 {submitStatus === 'success' && (
@@ -243,7 +255,7 @@ export default function ContactFormV3({ className }: ContactFormV3Props) {
                     <Mail className="w-5 h-5 text-biowox-500 mt-1" />
                     <div>
                       <p className="font-medium text-gray-900">E-mail</p>
-                      <p className="text-gray-600">laboratoriomedicogmail.com</p>
+                      <p className="text-gray-600">laboratoriomedico@gmail.com</p>
                     </div>
                   </div>
                   
