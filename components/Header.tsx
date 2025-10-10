@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import VersionSwitcher from './VersionSwitcher';
 
@@ -41,16 +41,9 @@ export default function Header() {
             </a>
           </nav>
 
-          {/* Version Switcher and Login Button */}
+          {/* Version Switcher */}
           <div className="flex items-center space-x-4">
             <VersionSwitcher />
-            <Link
-              href="/login"
-              className="flex items-center space-x-2 bg-biowox-500 hover:bg-biowox-600 text-white px-4 py-2 rounded-lg transition-colors group"
-            >
-              <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform" />
-              <span className="text-sm font-medium">Login</span>
-            </Link>
 
             {/* Mobile Menu Button */}
             <button
