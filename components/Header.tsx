@@ -33,12 +33,6 @@ export default function Header() {
             <a href="#diferenciais" className="text-gray-600 hover:text-biowox-500 transition-colors">
               Diferenciais
             </a>
-            <a href="#como-funciona" className="text-gray-600 hover:text-biowox-500 transition-colors">
-              Como Funciona
-            </a>
-            <a href="#seguranca" className="text-gray-600 hover:text-biowox-500 transition-colors">
-              Segurança
-            </a>
             <a href="#contato" className="text-gray-600 hover:text-biowox-500 transition-colors">
               Contato
             </a>
@@ -83,20 +77,6 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Diferenciais
-              </a>
-              <a
-                href="#como-funciona"
-                className="block text-gray-600 hover:text-biowox-500 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Como Funciona
-              </a>
-              <a
-                href="#seguranca"
-                className="block text-gray-600 hover:text-biowox-500 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Segurança
               </a>
               <a
                 href="#contato"
