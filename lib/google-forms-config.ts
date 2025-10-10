@@ -3,14 +3,14 @@
 
 export const GOOGLE_FORMS_CONFIG = {
   // Your Google Form ID (extract from the form URL)
-  FORM_ID: 'YOUR_FORM_ID', // Replace with your actual form ID
+  FORM_ID: '1FAIpQLScX__7R4C2mzJIpdfxwJdZHLQBfpwzIvkLbeGCwb-ulv4dEig', // Your actual form ID
   
-  // Field entry IDs (get these by inspecting your Google Form fields)
+  // Field entry IDs (extracted from Google Form HTML)
   FIELDS: {
-    NAME: 'entry.1234567890',     // Replace with your name field ID
-    EMAIL: 'entry.0987654321',    // Replace with your email field ID
-    PHONE: 'entry.1122334455',    // Replace with your phone field ID
-    MESSAGE: 'entry.5566778899',  // Replace with your message field ID
+    NAME: 'entry.125867562',     // Nome completo field ID
+    EMAIL: 'entry.1645603381',   // email field ID
+    PHONE: 'entry.622911738',    // Telefone field ID
+    MESSAGE: 'entry.129250280',  // Mensagem field ID
   }
 };
 
