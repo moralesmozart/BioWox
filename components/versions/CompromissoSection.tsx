@@ -38,14 +38,14 @@ const certificacoes = [
     icon: '🏥',
   },
   {
-    title: 'CRBM',
+    title: 'CRM e CRBM',
     description: 'Conselho de medicina e biomedicina',
     icon: '🔬',
   },
   {
-    title: 'CRM',
-    description: 'Conselho de medicina e biomedicina',
-    icon: '👨‍⚕️',
+    title: 'LGPD',
+    description: 'Conformidade com a Lei Geral de Proteção de Dados',
+    icon: '🔒',
   },
 ];
 
