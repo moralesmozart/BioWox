@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin, Search, FileText, MessageCircle } from 'lucide-react';
 import { contactFormSchema, sanitizeInput } from '@/lib/security';
 import { formatPhoneNumber } from '@/lib/utils';
+import { GOOGLE_FORMS_CONFIG } from '@/lib/google-forms-config';
 import type { ContactFormData } from '@/types';
 
 interface ContactFormV3Props {
@@ -49,22 +50,32 @@ export default function ContactFormV3({ className }: ContactFormV3Props) {
         name: sanitizeInput(data.name),
         email: sanitizeInput(data.email).toLowerCase(),
         phone: sanitizeInput(data.phone),
-        message: data.message ? sanitizeInput(data.message) : undefined,
+        message: data.message ? sanitizeInput(data.message) : '',
       };
 
-      // Simular envio (em produção, seria uma chamada para API)
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // Simular sucesso/erro aleatório para demonstração
-      const success = Math.random() > 0.3;
+      // Submit to Google Form
+      const formData = new FormData();
       
-      if (success) {
-        setSubmitStatus('success');
-        reset();
-      } else {
-        setSubmitStatus('error');
-      }
+      // Use configuration for field IDs
+      formData.append(GOOGLE_FORMS_CONFIG.FIELDS.NAME, sanitizedData.name);
+      formData.append(GOOGLE_FORMS_CONFIG.FIELDS.EMAIL, sanitizedData.email);
+      formData.append(GOOGLE_FORMS_CONFIG.FIELDS.PHONE, sanitizedData.phone);
+      formData.append(GOOGLE_FORMS_CONFIG.FIELDS.MESSAGE, sanitizedData.message);
+      
+      // Submit to Google Form
+      const response = await fetch(`https://docs.google.com/forms/d/${GOOGLE_FORMS_CONFIG.FORM_ID}/formResponse`, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Required for Google Forms
+      });
+
+      // Since we use no-cors, we can't check response status
+      // But if no error is thrown, assume success
+      setSubmitStatus('success');
+      reset();
+      
     } catch (error) {
+      console.error('Error submitting form:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
