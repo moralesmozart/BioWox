@@ -98,7 +98,7 @@ export default function CompromissoSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {certificacoes.map((cert, index) => (
             <motion.div
               key={index}
