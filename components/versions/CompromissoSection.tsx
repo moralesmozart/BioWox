@@ -33,11 +33,6 @@ const compromissos = [
 
 const certificacoes = [
   {
-    title: 'Visa Correto',
-    description: 'Certificação para processamento de exames microbiológicos',
-    icon: '🏥',
-  },
-  {
     title: 'CRM e CRBM',
     description: 'Conselho de medicina e biomedicina',
     icon: '🔬',
@@ -98,7 +93,7 @@ export default function CompromissoSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {certificacoes.map((cert, index) => (
             <motion.div
               key={index}
