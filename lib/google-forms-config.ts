@@ -7,10 +7,10 @@ export const GOOGLE_FORMS_CONFIG = {
   
   // Field entry IDs (extracted from Google Form HTML)
   FIELDS: {
-    NAME: 'entry.125867562',     // Nome completo field ID
+    NAME: 'entry.60519878',      // Nome completo field ID
     EMAIL: 'entry.1645603381',   // email field ID
-    PHONE: 'entry.622911738',    // Telefone field ID
-    MESSAGE: 'entry.129250280',  // Mensagem field ID
+    PHONE: 'entry.1691944830',   // Telefone field ID
+    MESSAGE: 'entry.1294509315', // Mensagem field ID
   }
 };
 
