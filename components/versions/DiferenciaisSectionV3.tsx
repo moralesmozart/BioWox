@@ -26,8 +26,8 @@ const diferenciais = [
     delay: 0.4,
   },
   {
-    title: 'Apoio completo em microbiologia',
-    description: 'Somos parceiros no monitoramento da saúde dos colaboradores e oferecemos suporte técnico em interpretação de laudos e controle sanitário.',
+    title: 'Serviços de Microbiologia para Laboratórios Parceiros',
+    description: 'Nosso laboratório oferece serviços especializados de microbiologia voltados exclusivamente para outros laboratórios de análises clínicas, veterinárias ou ambientais que desejam terceirizar essa etapa com qualidade, segurança e confiabilidade.',
     icon: <Microscope className="w-8 h-8" />,
     delay: 0.6,
   },

@@ -38,19 +38,14 @@ const certificacoes = [
     icon: '🏥',
   },
   {
-    title: 'ISO 15189',
-    description: 'Qualidade em laboratórios de análises clínicas',
-    icon: '📋',
-  },
-  {
     title: 'CRBM',
-    description: 'Conselho Regional de Biomedicina',
+    description: 'Conselho de medicina e biomedicina',
     icon: '🔬',
   },
   {
-    title: 'LGPD',
-    description: 'Conformidade com a Lei Geral de Proteção de Dados',
-    icon: '🔒',
+    title: 'CRM',
+    description: 'Conselho de medicina e biomedicina',
+    icon: '👨‍⚕️',
   },
 ];
 

@@ -42,6 +42,9 @@ export default function Header() {
             <a href="#contato" className="text-gray-600 hover:text-biowox-500 transition-colors">
               Contato
             </a>
+            <a href="#contato?tab=results" className="text-gray-600 hover:text-biowox-500 transition-colors">
+              Consultar Resultados
+            </a>
           </nav>
 
           {/* Version Switcher and Login Button */}
@@ -101,6 +104,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contato
+              </a>
+              <a
+                href="#contato?tab=results"
+                className="block text-gray-600 hover:text-biowox-500 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Consultar Resultados
               </a>
             </nav>
           </motion.div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -30,6 +30,14 @@ export default function ContactFormV3({ className }: ContactFormV3Props) {
   });
 
   const phoneValue = watch('phone');
+
+  // Check URL parameters to open results tab
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tab') === 'results') {
+      setActiveTab('results');
+    }
+  }, []);
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -255,7 +263,7 @@ export default function ContactFormV3({ className }: ContactFormV3Props) {
                     <Mail className="w-5 h-5 text-biowox-500 mt-1" />
                     <div>
                       <p className="font-medium text-gray-900">E-mail</p>
-                      <p className="text-gray-600">laboratoriomedico@gmail.com</p>
+                      <p className="text-gray-600">laboratoriomedicobiowox@gmail.com</p>
                     </div>
                   </div>
                   
