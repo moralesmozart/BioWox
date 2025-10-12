@@ -68,7 +68,7 @@ export default function DiferenciaisSectionV3() {
           { number: '24-48h', label: 'Tempo de Liberação' },
           { number: '100%', label: 'Conformidade ANVISA' },
           { number: '2', label: 'Médicos Infectologistas' },
-          { number: '500+', label: 'Empresas Atendidas' },
+          { number: '20+', label: 'Empresas Atendidas' },
         ].map((stat, index) => (
           <motion.div
             key={index}
