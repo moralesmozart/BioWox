@@ -16,7 +16,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.biowox.com/'),
+  metadataBase: new URL('https://moralesmozart.github.io/biowox-landing/'),
   title: 'BioWox - Microbiologia Avançada | O futuro da microbiologia já chegou',
   description: '🧬 Laboratório de microbiologia avançada com tecnologia de ponta. Automação, precisão e velocidade em cada análise. O futuro da microbiologia já chegou!',
   keywords: 'microbiologia, laboratório, análise, automação, precisão, saúde, BioWox, tecnologia, ciência',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://www.biowox.com/',
+    url: 'https://moralesmozart.github.io/biowox-landing/',
     title: 'BioWox - Microbiologia Avançada',
     description: '🧬 O futuro da microbiologia já chegou! Laboratório com tecnologia de ponta, automação e precisão em cada resultado.',
     siteName: 'BioWox',

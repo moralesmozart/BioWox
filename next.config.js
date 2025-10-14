@@ -6,9 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Base path para GitHub Pages - removed for custom domain
-  // basePath: process.env.NODE_ENV === 'production' ? '/BioWox' : '',
-  // assetPrefix: process.env.NODE_ENV === 'production' ? '/BioWox/' : '',
+  // Base path para GitHub Pages - usando subdiretório
+  basePath: process.env.NODE_ENV === 'production' ? '/biowox-landing' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/biowox-landing/' : '',
 };
 
 module.exports = nextConfig;
