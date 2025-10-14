@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin, Search, FileText, MessageCircle } from 'lucide-react';
 import { contactFormSchema, sanitizeInput } from '@/lib/security';
 import { formatPhoneNumber } from '@/lib/utils';
+import { GOOGLE_FORMS_CONFIG } from '@/lib/google-forms-config';
 import type { ContactFormData } from '@/types';
 
 interface ContactFormProps {
@@ -16,6 +17,7 @@ interface ContactFormProps {
 export default function ContactForm({ className }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [activeTab, setActiveTab] = useState<'contact' | 'results'>('contact');
 
   const {
     register,
@@ -30,6 +32,14 @@ export default function ContactForm({ className }: ContactFormProps) {
 
   const phoneValue = watch('phone');
 
+  // Check URL parameters to open results tab
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tab') === 'results') {
+      setActiveTab('results');
+    }
+  }, []);
+
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
@@ -40,244 +50,287 @@ export default function ContactForm({ className }: ContactFormProps) {
         name: sanitizeInput(data.name),
         email: sanitizeInput(data.email).toLowerCase(),
         phone: sanitizeInput(data.phone),
-        message: data.message ? sanitizeInput(data.message) : undefined,
+        message: data.message ? sanitizeInput(data.message) : '',
       };
 
-      // Simular envio (em produção, seria uma chamada para API)
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // Simular sucesso/erro aleatório para demonstração
-      const success = Math.random() > 0.3;
+      // Submit to Google Form
+      const formData = new FormData();
       
-      if (success) {
-        setSubmitStatus('success');
-        reset();
-      } else {
-        setSubmitStatus('error');
-      }
+      // Use configuration for field IDs
+      formData.append(GOOGLE_FORMS_CONFIG.FIELDS.NAME, sanitizedData.name);
+      formData.append(GOOGLE_FORMS_CONFIG.FIELDS.EMAIL, sanitizedData.email);
+      formData.append(GOOGLE_FORMS_CONFIG.FIELDS.PHONE, sanitizedData.phone);
+      formData.append(GOOGLE_FORMS_CONFIG.FIELDS.MESSAGE, sanitizedData.message);
+      
+      // Submit to Google Form
+      const response = await fetch(`https://docs.google.com/forms/d/${GOOGLE_FORMS_CONFIG.FORM_ID}/formResponse`, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Required for Google Forms
+      });
+
+      // Since we use no-cors, we can't check response status
+      // But if no error is thrown, assume success
+      setSubmitStatus('success');
+      reset();
+      
     } catch (error) {
-      console.error('Erro ao enviar formulário:', error);
+      console.error('Error submitting form:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const contactInfo = [
-    {
-      icon: <Phone className="w-5 h-5" />,
-      label: 'WhatsApp',
-      value: '+55 11 99999-9999',
-      href: 'https://wa.me/5511999999999',
-    },
-    {
-      icon: <Mail className="w-5 h-5" />,
-      label: 'Email',
-      value: 'contato@biowox.com.br',
-      href: 'mailto:contato@biowox.com.br',
-    },
-    {
-      icon: <MapPin className="w-5 h-5" />,
-      label: 'Endereço',
-      value: 'São Paulo, SP, Brasil',
-      href: '#',
-    },
-  ];
+  const handleResultLookup = () => {
+    // Placeholder for result lookup functionality
+    alert('Funcionalidade de consulta de resultados será implementada em breve!');
+  };
 
   return (
-    <div className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Informações de contato */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="space-y-8"
+    <div className={`max-w-4xl mx-auto ${className}`}>
+      {/* Tabs */}
+      <div className="flex mb-8 bg-gray-100 rounded-lg p-1">
+        <button
+          onClick={() => setActiveTab('contact')}
+          className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 rounded-md transition-all ${
+            activeTab === 'contact'
+              ? 'bg-white text-biowox-600 shadow-sm'
+              : 'text-gray-600 hover:text-gray-800'
+          }`}
         >
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Entre em Contato
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              Estamos prontos para atender suas necessidades em microbiologia. 
-              Entre em contato conosco e descubra como podemos ajudar.
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {contactInfo.map((info, index) => (
-              <motion.a
-                key={index}
-                href={info.href}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors group"
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-biowox-500 to-biowoxLight-400 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                  {info.icon}
-                </div>
-                <div>
-                  <div className="font-semibold text-gray-900">
-                    {info.label}
-                  </div>
-                  <div className="text-gray-600">
-                    {info.value}
-                  </div>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Formulário */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200"
+          <Mail className="w-4 h-4" />
+          <span className="font-medium">Entre em Contato</span>
+        </button>
+        <button
+          onClick={() => setActiveTab('results')}
+          className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 rounded-md transition-all ${
+            activeTab === 'results'
+              ? 'bg-white text-biowox-600 shadow-sm'
+              : 'text-gray-600 hover:text-gray-800'
+          }`}
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Solicite uma Proposta
-          </h3>
-
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Nome */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Nome Completo *
-              </label>
-              <input
-                {...register('name')}
-                type="text"
-                id="name"
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors ${
-                  errors.name ? 'border-red-500' : 'border-gray-300'
-                }`}
-                placeholder="Seu nome completo"
-              />
-              {errors.name && (
-                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email *
-              </label>
-              <input
-                {...register('email')}
-                type="email"
-                id="email"
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                }`}
-                placeholder="seu@email.com"
-              />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-
-            {/* Telefone */}
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                Telefone *
-              </label>
-              <input
-                {...register('phone')}
-                type="tel"
-                id="phone"
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors ${
-                  errors.phone ? 'border-red-500' : 'border-gray-300'
-                }`}
-                placeholder="(11) 99999-9999"
-                value={phoneValue ? formatPhoneNumber(phoneValue) : ''}
-                onChange={(e) => {
-                  const formatted = formatPhoneNumber(e.target.value);
-                  e.target.value = formatted;
-                }}
-              />
-              {errors.phone && (
-                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.phone.message}
-                </p>
-              )}
-            </div>
-
-            {/* Mensagem */}
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Mensagem (opcional)
-              </label>
-              <textarea
-                {...register('message')}
-                id="message"
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors resize-none"
-                placeholder="Conte-nos mais sobre suas necessidades..."
-              />
-            </div>
-
-            {/* Status de envio */}
-            {submitStatus === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2"
-              >
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-green-800">
-                  Mensagem enviada com sucesso! Entraremos em contato em breve.
-                </span>
-              </motion.div>
-            )}
-
-            {submitStatus === 'error' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2"
-              >
-                <AlertCircle className="w-5 h-5 text-red-600" />
-                <span className="text-red-800">
-                  Erro ao enviar mensagem. Tente novamente ou entre em contato diretamente.
-                </span>
-              </motion.div>
-            )}
-
-            {/* Botão de envio */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full button-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Enviando...
-                </>
-              ) : (
-                <>
-                  <Send className="w-5 h-5" />
-                  Enviar Mensagem
-                </>
-              )}
-            </button>
-          </form>
-        </motion.div>
+          <Search className="w-4 h-4" />
+          <span className="font-medium">Consultar Resultados</span>
+        </button>
       </div>
+
+      {/* Contact Tab */}
+      {activeTab === 'contact' && (
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Form */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                Envie sua Mensagem
+              </h3>
+              
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Nome Completo *
+                  </label>
+                  <input
+                    {...register('name')}
+                    type="text"
+                    id="name"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors"
+                    placeholder="Seu nome completo"
+                  />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    E-mail *
+                  </label>
+                  <input
+                    {...register('email')}
+                    type="email"
+                    id="email"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors"
+                    placeholder="seu@email.com"
+                  />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    Telefone *
+                  </label>
+                  <input
+                    {...register('phone')}
+                    type="tel"
+                    id="phone"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors"
+                    placeholder="(48) 9 9692-7323"
+                    value={phoneValue ? formatPhoneNumber(phoneValue) : ''}
+                  />
+                  {errors.phone && (
+                    <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Mensagem
+                  </label>
+                  <textarea
+                    {...register('message')}
+                    id="message"
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-biowox-500 focus:border-transparent transition-colors resize-none"
+                    placeholder="Conte-nos sobre suas necessidades..."
+                  />
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                  )}
+                </div>
+
+                <div className="space-y-3">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-biowox-500 hover:bg-biowox-600 disabled:bg-gray-400 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Enviando...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        <span>Enviar Mensagem</span>
+                      </>
+                    )}
+                  </button>
+                  
+                  {/* WhatsApp CTA Button */}
+                  <button
+                    type="button"
+                    onClick={() => window.open('http://wa.me/+5548996927323', '_blank')}
+                    className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Fale conosco no WhatsApp</span>
+                  </button>
+                </div>
+
+                {/* Status Messages */}
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center space-x-2 text-green-600 bg-green-50 p-3 rounded-lg"
+                  >
+                    <CheckCircle className="w-5 h-5" />
+                    <span className="text-sm font-medium">
+                      Mensagem enviada com sucesso! Entraremos em contato em breve.
+                    </span>
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center space-x-2 text-red-600 bg-red-50 p-3 rounded-lg"
+                  >
+                    <AlertCircle className="w-5 h-5" />
+                    <span className="text-sm font-medium">
+                      Erro ao enviar mensagem. Tente novamente.
+                    </span>
+                  </motion.div>
+                )}
+              </form>
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-6">
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                  Informações de Contato
+                </h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <Phone className="w-5 h-5 text-biowox-500 mt-1" />
+                    <div>
+                      <p className="font-medium text-gray-900">Telefone</p>
+                      <p className="text-gray-600">(48) 9 9692-7323</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <Mail className="w-5 h-5 text-biowox-500 mt-1" />
+                    <div>
+                      <p className="font-medium text-gray-900">E-mail</p>
+                      <p className="text-gray-600">laboratoriomedicobiowox@gmail.com</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <MapPin className="w-5 h-5 text-biowox-500 mt-1" />
+                    <div>
+                      <p className="font-medium text-gray-900">Endereço</p>
+                      <p className="text-gray-600">
+                        Rua 13 de Maio, 167, Sala 4<br />
+                        Tijucas - SC, 88200-180
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Results Tab */}
+      {activeTab === 'results' && (
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+            <div className="max-w-md mx-auto">
+              <div className="w-16 h-16 bg-biowox-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FileText className="w-8 h-8 text-biowox-600" />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Consultar Resultados
+              </h3>
+              
+              <p className="text-gray-600 mb-8">
+                Acesse seus resultados de exames ocupacionais de forma rápida e segura.
+              </p>
+              
+              <button
+                onClick={handleResultLookup}
+                className="w-full bg-biowox-500 hover:bg-biowox-600 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
+              >
+                <Search className="w-5 h-5" />
+                <span>Acessar Sistema de Resultados</span>
+              </button>
+              
+              <p className="text-sm text-gray-500 mt-4">
+                Você precisará do seu CPF e número do exame para acessar os resultados.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }

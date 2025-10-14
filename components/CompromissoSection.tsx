@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Shield, Zap, Headphones, Award } from 'lucide-react';
-import Section from '../Section';
+import Section from './Section';
 
 const compromissos = [
   {

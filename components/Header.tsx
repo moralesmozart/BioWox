@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import VersionSwitcher from './VersionSwitcher';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,11 +40,8 @@ export default function Header() {
             </a>
           </nav>
 
-          {/* Version Switcher */}
+          {/* Mobile Menu Button */}
           <div className="flex items-center space-x-4">
-            <VersionSwitcher />
-
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 text-gray-600 hover:text-biowox-500 transition-colors"

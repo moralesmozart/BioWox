@@ -2,13 +2,13 @@
 
 import { motion } from 'framer-motion';
 import HeroSection from '@/components/HeroSection';
-import DiferenciaisSectionV3 from './DiferenciaisSectionV3';
+import DiferenciaisSection from './DiferenciaisSection';
 import ParaQuemSection from './ParaQuemSection';
 import CompromissoSection from './CompromissoSection';
-import ContactFormV3 from './ContactFormV3';
-import FooterV3 from './FooterV3';
+import ContactForm from './ContactForm';
+import Footer from './Footer';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
-import Section from '@/components/Section';
+import Section from './Section';
 
 export default function Version3() {
   return (
@@ -50,7 +50,7 @@ export default function Version3() {
         transition={{ duration: 0.6, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        <DiferenciaisSectionV3 />
+        <DiferenciaisSection />
       </motion.div>
 
       {/* Seção Nosso Compromisso */}
@@ -77,7 +77,7 @@ export default function Version3() {
           background="gray"
         >
           <div className="relative">
-            <ContactFormV3 />
+            <ContactForm />
             {/* Version 3 enhancement indicator */}
             <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full animate-pulse"></div>
           </div>
@@ -85,7 +85,7 @@ export default function Version3() {
       </motion.div>
 
       {/* Footer */}
-      <FooterV3 />
+      <Footer />
       
       {/* Floating WhatsApp Button */}
       <WhatsAppFloatingButton />

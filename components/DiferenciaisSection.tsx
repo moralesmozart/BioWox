@@ -1,47 +1,35 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Zap, Target, Clock, Shield, Brain, Users } from 'lucide-react';
+import { Truck, Stethoscope, Users, Microscope } from 'lucide-react';
 import Section from './Section';
 import Card from './Card';
 import MedicalBackground from './MedicalBackground';
 
 const diferenciais = [
   {
-    title: 'Automação Total',
-    description: 'Processamento automatizado com inteligência artificial para máxima eficiência e precisão nos resultados.',
-    icon: <Zap className="w-8 h-8" />,
+    title: 'Coleta no local da empresa',
+    description: 'Evite deslocamentos! Nossa equipe vai até você, realizando coletas diretamente no ambiente de trabalho, com agendamento flexível e atendimento humanizado.',
+    icon: <Truck className="w-8 h-8" />,
     delay: 0,
   },
   {
-    title: 'Precisão Científica',
-    description: 'Tecnologia de ponta e equipe especializada garantem resultados confiáveis e precisos em cada análise.',
-    icon: <Target className="w-8 h-8" />,
+    title: 'Especialistas em saúde ocupacional alimentar',
+    description: 'Foco total em exames admissionais, periódicos e demissionais para empresas que exigem alto padrão sanitário e de qualidade.',
+    icon: <Stethoscope className="w-8 h-8" />,
     delay: 0.2,
   },
   {
-    title: 'Velocidade Excepcional',
-    description: 'Resultados em tempo recorde sem comprometer a qualidade, otimizando o tempo de diagnóstico.',
-    icon: <Clock className="w-8 h-8" />,
+    title: 'Consultoria com infectologistas',
+    description: 'Dois médicos infectologistas integram nosso time, oferecendo suporte especializado em casos como coproculturas positivas, surtos, ou dúvidas sobre exames microbiológicos.',
+    icon: <Users className="w-8 h-8" />,
     delay: 0.4,
   },
   {
-    title: 'Segurança Máxima',
-    description: 'Protocolos rigorosos de segurança e conformidade com ANVISA para proteção total dos dados.',
-    icon: <Shield className="w-8 h-8" />,
+    title: 'Serviços de Microbiologia para Laboratórios Parceiros',
+    description: 'Nosso laboratório oferece serviços especializados de microbiologia voltados exclusivamente para outros laboratórios de análises clínicas, veterinárias ou ambientais que desejam terceirizar essa etapa com qualidade, segurança e confiabilidade.',
+    icon: <Microscope className="w-8 h-8" />,
     delay: 0.6,
-  },
-  {
-    title: 'Inteligência Artificial',
-    description: 'Algoritmos avançados de machine learning para análise preditiva e detecção precoce de patógenos.',
-    icon: <Brain className="w-8 h-8" />,
-    delay: 0.8,
-  },
-  {
-    title: 'Equipe Especializada',
-    description: 'Cientistas e técnicos altamente qualificados com vasta experiência em microbiologia clínica.',
-    icon: <Users className="w-8 h-8" />,
-    delay: 1.0,
   },
 ];
 
@@ -52,10 +40,10 @@ export default function DiferenciaisSection() {
       <Section
         id="diferenciais"
         title="Nossos Diferenciais"
-        subtitle="Tecnologia de ponta, precisão científica e inovação em cada análise"
+        subtitle="Especialização em saúde ocupacional com foco em excelência e conformidade"
         background="gray"
       >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {diferenciais.map((diferencial, index) => (
           <Card
             key={index}
@@ -68,7 +56,7 @@ export default function DiferenciaisSection() {
         ))}
       </div>
       
-      {/* Estatísticas */}
+      {/* Estatísticas específicas para saúde ocupacional */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -77,10 +65,10 @@ export default function DiferenciaisSection() {
         className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8"
       >
         {[
-          { number: '99.9%', label: 'Precisão' },
-          { number: '24h', label: 'Tempo Médio' },
-          { number: '10k+', label: 'Análises/Mês' },
+          { number: '24-48h', label: 'Tempo de Liberação' },
           { number: '100%', label: 'Conformidade ANVISA' },
+          { number: '2', label: 'Médicos Infectologistas' },
+          { number: '20+', label: 'Empresas Atendidas' },
         ].map((stat, index) => (
           <motion.div
             key={index}

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Building2, Utensils, Pill, ChefHat, Truck, Shield } from 'lucide-react';
-import Section from '../Section';
+import Section from './Section';
 
 const targetAudiences = [
   {

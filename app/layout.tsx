@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
-import { VersionProvider } from '@/lib/version-context';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -71,11 +70,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#00FF99" />
       </head>
-      <body className={`${inter.className} antialiased`}>
-        <VersionProvider>
-          {children}
-        </VersionProvider>
-      </body>
+            <body className={`${inter.className} antialiased`}>
+              {children}
+            </body>
     </html>
   );
 }
