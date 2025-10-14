@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import FloatingIcons from './FloatingIcons';
-import ThemeToggle from './ThemeToggle';
 import { cn } from '@/lib/utils';
 
 interface HeroSectionProps {
@@ -33,14 +32,11 @@ export default function HeroSection({
 
   return (
     <section className={cn('relative min-h-screen flex items-center justify-center overflow-hidden pt-16', className)}>
-      {/* Theme Toggle Button */}
-      <ThemeToggle />
+      {/* Background branco */}
+      <div className="absolute inset-0 bg-white" />
       
-      {/* Background com gradiente */}
-      <div className="absolute inset-0 hero-bg opacity-90" />
-      
-      {/* Overlay com padrão sutil */}
-      <div className="absolute inset-0 hero-overlay" />
+      {/* Overlay sutil */}
+      <div className="absolute inset-0 bg-biowox-500/10" />
       
       {/* Icons flutuantes */}
       <FloatingIcons />
@@ -118,10 +114,10 @@ export default function HeroSection({
               
               {/* Texto del logo */}
               <div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold hero-text">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-biowox-600">
                   Bio<span className="biowox-gradient-text">Wox</span>
                 </h1>
-                <p className="text-lg sm:text-xl hero-text/90 font-medium">
+                <p className="text-lg sm:text-xl text-biowox-600/90 font-medium">
                   {logoSubtitle || "MICROBIOLOGIA AVANÇADA"}
                 </p>
               </div>
@@ -133,7 +129,7 @@ export default function HeroSection({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold hero-text leading-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-biowox-600 leading-tight"
           >
             {title}
           </motion.h2>
@@ -143,7 +139,7 @@ export default function HeroSection({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg sm:text-xl lg:text-2xl hero-text/90 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl lg:text-2xl text-biowox-600/90 max-w-3xl mx-auto leading-relaxed"
           >
             {subtitle}
           </motion.p>
@@ -154,7 +150,7 @@ export default function HeroSection({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-base sm:text-lg hero-text/80 max-w-4xl mx-auto leading-relaxed mt-4"
+              className="text-base sm:text-lg text-biowox-600/80 max-w-4xl mx-auto leading-relaxed mt-4"
             >
               {description}
             </motion.p>
@@ -188,12 +184,12 @@ export default function HeroSection({
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/50 dark:border-white/50 light:border-biowox-500/50 rounded-full flex justify-center"
+          className="w-6 h-10 border-2 border-biowox-500/50 rounded-full flex justify-center"
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-white/70 dark:bg-white/70 light:bg-biowox-500/70 rounded-full mt-2"
+            className="w-1 h-3 bg-biowox-500/70 rounded-full mt-2"
           />
         </motion.div>
       </motion.div>

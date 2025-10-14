@@ -44,39 +44,6 @@
     @apply bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-white/20 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2;
   }
 
-  /* Theme-specific styles */
-  .dark-theme .hero-bg {
-    @apply bg-gradient-to-r from-biowox-500 to-biowoxLight-400;
-  }
-  
-  .light-theme .hero-bg {
-    @apply bg-white;
-  }
-  
-  .dark-theme .hero-text {
-    @apply text-white;
-  }
-  
-  .light-theme .hero-text {
-    @apply text-biowox-600;
-  }
-  
-  .dark-theme .hero-overlay {
-    @apply bg-black/20;
-  }
-  
-  .light-theme .hero-overlay {
-    @apply bg-biowox-500/10;
-  }
-  
-  /* Light theme specific overrides */
-  .light-theme .light\:border-biowox-500\/50 {
-    @apply border-biowox-500/50;
-  }
-  
-  .light-theme .light\:bg-biowox-500\/70 {
-    @apply bg-biowox-500/70;
-  }
 }
 
 @layer utilities {
