@@ -1,0 +1,18 @@
+# Global code owners - all files require approval from moralesmozart
+* @moralesmozart
+
+# Specific directories
+/app/ @moralesmozart
+/components/ @moralesmozart
+/lib/ @moralesmozart
+/types/ @moralesmozart
+/public/ @moralesmozart
+
+# Configuration files
+package.json @moralesmozart
+next.config.js @moralesmozart
+tailwind.config.js @moralesmozart
+tsconfig.json @moralesmozart
+
+# GitHub Actions
+/.github/ @moralesmozart
