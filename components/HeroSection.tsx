@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import FloatingIcons from './FloatingIcons';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface HeroSectionProps {
@@ -58,21 +57,45 @@ export default function HeroSection({
             className="mb-8"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-6">
-              {/* Logo BioWox */}
+              {/* Logo molecular */}
               <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 className="relative w-16 h-16 sm:w-20 sm:h-20"
               >
-                <Image
-                  src="/biowox-logo.png"
-                  alt="BioWox Logo"
-                  width={80}
-                  height={80}
-                  className="rounded-full shadow-lg"
-                  priority
-                />
+                {/* Círculo principal con gradiente */}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-b from-biowox-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
+                  {/* Diseño molecular interno */}
+                  <svg width="40" height="40" viewBox="0 0 50 50" className="text-white sm:w-[50px] sm:h-[50px]">
+                    {/* Puntos centrales */}
+                    <circle cx="25" cy="25" r="2" fill="white" opacity="0.9" />
+                    <circle cx="20" cy="20" r="1.5" fill="white" opacity="0.7" />
+                    <circle cx="30" cy="20" r="1.5" fill="white" opacity="0.7" />
+                    <circle cx="20" cy="30" r="1.5" fill="white" opacity="0.7" />
+                    <circle cx="30" cy="30" r="1.5" fill="white" opacity="0.7" />
+                    
+                    {/* Puntos periféricos */}
+                    <circle cx="25" cy="10" r="2.5" fill="white" opacity="0.8" />
+                    <circle cx="25" cy="40" r="2.5" fill="white" opacity="0.8" />
+                    <circle cx="10" cy="25" r="2.5" fill="white" opacity="0.8" />
+                    <circle cx="40" cy="25" r="2.5" fill="white" opacity="0.8" />
+                    <circle cx="15" cy="15" r="2" fill="white" opacity="0.6" />
+                    <circle cx="35" cy="15" r="2" fill="white" opacity="0.6" />
+                    <circle cx="15" cy="35" r="2" fill="white" opacity="0.6" />
+                    <circle cx="35" cy="35" r="2" fill="white" opacity="0.6" />
+                    
+                    {/* Líneas conectoras */}
+                    <line x1="25" y1="25" x2="25" y2="10" stroke="white" strokeWidth="0.5" opacity="0.4" />
+                    <line x1="25" y1="25" x2="25" y2="40" stroke="white" strokeWidth="0.5" opacity="0.4" />
+                    <line x1="25" y1="25" x2="10" y2="25" stroke="white" strokeWidth="0.5" opacity="0.4" />
+                    <line x1="25" y1="25" x2="40" y2="25" stroke="white" strokeWidth="0.5" opacity="0.4" />
+                    <line x1="25" y1="25" x2="15" y2="15" stroke="white" strokeWidth="0.3" opacity="0.3" />
+                    <line x1="25" y1="25" x2="35" y2="15" stroke="white" strokeWidth="0.3" opacity="0.3" />
+                    <line x1="25" y1="25" x2="15" y2="35" stroke="white" strokeWidth="0.3" opacity="0.3" />
+                    <line x1="25" y1="25" x2="35" y2="35" stroke="white" strokeWidth="0.3" opacity="0.3" />
+                  </svg>
+                </div>
                 
                 {/* Efecto de brillo */}
                 <motion.div

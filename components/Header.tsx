@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,15 +19,8 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 relative">
-              <Image
-                src="/biowox-logo.png"
-                alt="BioWox Logo"
-                width={32}
-                height={32}
-                className="rounded-full"
-                priority
-              />
+            <div className="w-8 h-8 bg-gradient-to-b from-biowox-500 to-green-600 rounded-full flex items-center justify-center">
+              <div className="w-4 h-4 bg-white rounded-full"></div>
             </div>
             <span className="text-xl font-bold text-gray-900">
               Bio<span className="text-biowox-500">Wox</span>
