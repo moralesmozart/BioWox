@@ -341,10 +341,6 @@ export default function ContactForm({ className }: ContactFormProps) {
                     />
                   </div>
                 </div>
-                
-                <p className="text-sm text-gray-500 mt-4 text-center">
-                  Você precisará do seu CPF e número do exame para acessar os resultados.
-                </p>
               </div>
             </div>
           </div>
