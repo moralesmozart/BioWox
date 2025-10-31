@@ -35,7 +35,21 @@ export default function Header() {
             <a href="#contato" className="text-gray-600 hover:text-biowox-500 transition-colors">
               Contato
             </a>
-            <a href="#contato?tab=results" className="text-gray-600 hover:text-biowox-500 transition-colors">
+            <a 
+              href="#contato" 
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById('contato');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                  // Trigger results tab after scroll
+                  setTimeout(() => {
+                    window.dispatchEvent(new CustomEvent('openResultsTab'));
+                  }, 500);
+                }
+              }}
+              className="text-gray-600 hover:text-biowox-500 transition-colors"
+            >
               Consultar Resultados
             </a>
           </nav>
@@ -75,9 +89,20 @@ export default function Header() {
                 Contato
               </a>
               <a
-                href="#contato?tab=results"
+                href="#contato"
                 className="block text-gray-600 hover:text-biowox-500 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  const element = document.getElementById('contato');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    // Trigger results tab after scroll
+                    setTimeout(() => {
+                      window.dispatchEvent(new CustomEvent('openResultsTab'));
+                    }, 500);
+                  }
+                }}
               >
                 Consultar Resultados
               </a>

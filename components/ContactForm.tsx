@@ -32,12 +32,23 @@ export default function ContactForm({ className }: ContactFormProps) {
 
   const phoneValue = watch('phone');
 
-  // Check URL parameters to open results tab
+  // Check URL parameters to open results tab and listen for custom event from header
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('tab') === 'results') {
       setActiveTab('results');
     }
+
+    // Listen for custom event from header navigation
+    const handleOpenResultsTab = () => {
+      setActiveTab('results');
+    };
+
+    window.addEventListener('openResultsTab', handleOpenResultsTab);
+
+    return () => {
+      window.removeEventListener('openResultsTab', handleOpenResultsTab);
+    };
   }, []);
 
   const onSubmit = async (data: ContactFormData) => {
@@ -82,10 +93,6 @@ export default function ContactForm({ className }: ContactFormProps) {
     }
   };
 
-  const handleResultLookup = () => {
-    // Placeholder for result lookup functionality
-    alert('Funcionalidade de consulta de resultados será implementada em breve!');
-  };
 
   return (
     <div className={`max-w-4xl mx-auto ${className}`}>
@@ -302,31 +309,43 @@ export default function ContactForm({ className }: ContactFormProps) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-            <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 bg-biowox-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <FileText className="w-8 h-8 text-biowox-600" />
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-biowox-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <FileText className="w-8 h-8 text-biowox-600" />
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                  Consultar Resultados
+                </h3>
+                
+                <p className="text-gray-600">
+                  Acesse seus resultados de exames ocupacionais de forma rápida e segura.
+                </p>
               </div>
               
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Consultar Resultados
-              </h3>
-              
-              <p className="text-gray-600 mb-8">
-                Acesse seus resultados de exames ocupacionais de forma rápida e segura.
-              </p>
-              
-              <button
-                onClick={handleResultLookup}
-                className="w-full bg-biowox-500 hover:bg-biowox-600 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
-              >
-                <Search className="w-5 h-5" />
-                <span>Acessar Sistema de Resultados</span>
-              </button>
-              
-              <p className="text-sm text-gray-500 mt-4">
-                Você precisará do seu CPF e número do exame para acessar os resultados.
-              </p>
+              {/* Iframe Container */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <div className="flex justify-center items-center">
+                  <div className="w-full max-w-2xl">
+                    <iframe
+                      src="https://worklabweb.com.br/frame.php?Cliente=3752&i=1"
+                      name="I1"
+                      width="100%"
+                      height="135"
+                      className="border-0 rounded-lg bg-white shadow-sm"
+                      style={{ minHeight: '135px' }}
+                      title="Consulta de Resultados - BioWox"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                
+                <p className="text-sm text-gray-500 mt-4 text-center">
+                  Você precisará do seu CPF e número do exame para acessar os resultados.
+                </p>
+              </div>
             </div>
           </div>
         </motion.div>
