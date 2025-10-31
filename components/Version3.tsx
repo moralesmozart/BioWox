@@ -20,7 +20,7 @@ export default function Version3() {
       {/* Seção Hero - Version 3 with occupational health focus - Logo subtitle updated */}
       <div className="relative">
         <HeroSection
-          title="Especialista em exames laboratoriais de saúde ocupacional"
+          title="Especialista em exames laboratoriais de saúde ocupacional e coletas domiciliares"
           subtitle="Microbiologia automatizada"
           logoSubtitle="Laboratório Médico" 
           ctaText="Saiba mais"
