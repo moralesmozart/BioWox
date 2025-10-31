@@ -330,7 +330,7 @@ export default function ContactForm({ className }: ContactFormProps) {
                 <div className="flex justify-center items-center">
                   <div className="w-full max-w-2xl">
                     <iframe
-                      src="https://worklabweb.com.br/frame.php?Cliente=3752&i=1"
+                      src="https://portal.worklabweb.com.br/resultados-on-line/3752"
                       name="I1"
                       width="100%"
                       height="135"

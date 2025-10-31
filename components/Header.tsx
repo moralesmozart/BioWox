@@ -36,18 +36,9 @@ export default function Header() {
               Contato
             </a>
             <a 
-              href="#contato" 
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById('contato');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                  // Trigger results tab after scroll
-                  setTimeout(() => {
-                    window.dispatchEvent(new CustomEvent('openResultsTab'));
-                  }, 500);
-                }
-              }}
+              href="https://portal.worklabweb.com.br/resultados-on-line/3752"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-600 hover:text-biowox-500 transition-colors"
             >
               Consultar Resultados
@@ -89,20 +80,11 @@ export default function Header() {
                 Contato
               </a>
               <a
-                href="#contato"
+                href="https://portal.worklabweb.com.br/resultados-on-line/3752"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-gray-600 hover:text-biowox-500 transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMenuOpen(false);
-                  const element = document.getElementById('contato');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    // Trigger results tab after scroll
-                    setTimeout(() => {
-                      window.dispatchEvent(new CustomEvent('openResultsTab'));
-                    }, 500);
-                  }
-                }}
+                onClick={() => setIsMenuOpen(false)}
               >
                 Consultar Resultados
               </a>
